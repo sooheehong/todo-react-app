@@ -27,7 +27,9 @@
 
 import React from 'react';
 import Todo from './Todo';
+import AddTodo from './AddTodo';
 import './App.css'
+import { Paper, List, Container } from '@material-ui/core';
 
 class App extends React.Component {
 	constructor(props){
@@ -39,13 +41,39 @@ class App extends React.Component {
 			]
 		}
 	}
+	add = (item) => {
+		const thisItems = this.state.items;
+		item.id = "ID-" + thisItems.length;
+		item.done = false;
+		thisItems.push(item);
+		this.setState({items: thisItems});
+		console.log("items : ", this.state.items);
+	}
+	delete = (item) => {
+		const thisItems = this.state.items;
+		console.log("before update item : ", this.state.items);
+		const newItems = thisItems.filter(e => e.id !== item.id);
+		this.setState({items: newItems}, () => {
+			console.log("update item : ", this.state.items);
+		});
+	}
     render() {
-		var todos = this.state.items.map((item, index) => (
-			<Todo item={item} key={item.id} />
-		));
+		var todoItems = this.state.items.length && (
+			<Paper style={{ margin:16}}>
+				<List>
+					{this.state.items.map((item, index) => (
+						<Todo item={item} key={item.id} delete={this.delete} />
+					))}
+				</List>
+			</Paper>
+		)
+		
         return (
             <div className="App">
-				{todos}
+				<Container maxWidth="md">
+					<AddTodo add={this.add} />
+					<div className="TodoList"> {todoItems} </div>
+				</Container>
             </div>
         );
     }
