@@ -41,6 +41,26 @@ class App extends React.Component {
 			]
 		}
 	}
+	componentDidMount() {
+		const requestOptions = {
+			method: "GET",
+			headers: { "Content-Type": "application/json"}
+		};
+		fetch("http://localhost:8080/todo", requestOptions)
+			.then(response => response.json())
+			.then(
+				(response) => {
+					this.setState({
+						items: response.data
+					});
+				},
+				(error) => {
+					this.setState({
+						error
+					});
+				}
+			);
+	}
 	add = (item) => {
 		const thisItems = this.state.items;
 		item.id = "ID-" + thisItems.length;
@@ -78,5 +98,4 @@ class App extends React.Component {
         );
     }
 }
-
 export default App;
