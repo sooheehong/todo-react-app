@@ -3,8 +3,8 @@ import { API_BASE_URL  } from "../api-config";
 export function call(api, method, request) {
     let options = {
         headers: new Headers({
-            // "Content-Type": "application/json",
-            // 'Accept': 'application/json'
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
         }),
         url: API_BASE_URL + api,
         method: method
@@ -29,4 +29,13 @@ export function call(api, method, request) {
         }
         return Promise.reject(error);
     });
+}
+
+
+export function signin(userDTO) {
+    return call("/auth/signin", "POST", userDTO)
+        .then((response) => {
+            console.log("response : ", response);
+            alert("로그인 토근 : " + response.token);
+        });
 }
