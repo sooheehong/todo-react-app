@@ -32,19 +32,32 @@ export function call(api, method, request) {
     )
     .catch((error) => {
         console.log(error.status);
-        debugger
-        if(error.status == 403) {
+        if(error.status === 403) {
             window.location.href = "/login";
         }
         return Promise.reject(error);
     });
 }
 
-
 export function signin(userDTO) {
     return call("/auth/signin", "POST", userDTO)
         .then((response) => {
             localStorage.setItem(ACCESS_TOKEN, response.token);
             window.location.href = "/";
-        });
+        }
+    );
 }
+
+export function signout(userDTO) {
+    localStorage.setItem(ACCESS_TOKEN, null);
+    window.location.href = "/";
+};
+
+export function signup(userDTO) {
+    return call("/auth/signup", "POST", userDTO)
+    .then()
+    .catch((error) => {
+        alert(error.error);
+        return Promise.reject(error);
+    });
+};

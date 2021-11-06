@@ -5,12 +5,13 @@ import Login from "./Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import { Box } from "@material-ui/core";
+import SignUp from "./SignUp";
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright ⓒ"}
-            fsoftwareengineer, {new Date().getFullYear()}
+            sooheehong TODO APP, {new Date().getFullYear()}
             {"."}
         </Typography>
     );
@@ -25,6 +26,9 @@ class AppRouter extends React.Component {
                         <Switch>
                             <Route path="/login">
                                 <Login />
+                            </Route>
+                            <Route path="/signup">
+                                <SignUp />
                             </Route>
                             <Route path="/">
                                 <App />
