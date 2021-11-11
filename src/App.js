@@ -48,12 +48,14 @@ class App extends React.Component {
 			<AppBar position="static">
 				<Toolbar>
 					<Grid justifyContent="space-between" container>
-						<Typography variant="h6">오늘의 할일</Typography>
-					</Grid>
-					<Grid>
-						<Button color="inherit" onClick={signout}>
-							로그아웃
-						</Button>
+						<Grid item>
+							<Typography variant="h6">오늘의 할일</Typography>
+						</Grid>
+						<Grid>
+							<Button color="inherit" onClick={signout}>
+								로그아웃
+							</Button>
+						</Grid>
 					</Grid>
 				</Toolbar>
 			</AppBar>
